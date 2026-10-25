@@ -1,3 +1,4 @@
+
 import os
 import pymysql
 from dotenv import load_dotenv
@@ -9,12 +10,12 @@ def get_db_connection():
     db_host = os.getenv("DB_HOST")
     db_port = int(os.getenv("DB_PORT", "4000"))
     db_user = os.getenv("DB_USER")
-    db_password = os.getenv("DB_PASSWORD")
+    db_password = os.getenv("PASSWORD")
     db_name = os.getenv("DB_NAME")
 
     if not db_password:
         raise RuntimeError(
-            "DB_PASSWORD is missing from the environment"
+            "PASSWORD is missing from the environment"
         )
 
     return pymysql.connect(
