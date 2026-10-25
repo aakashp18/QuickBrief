@@ -12,22 +12,9 @@ def get_db_connection():
     db_password = os.getenv("DB_PASSWORD")
     db_name = os.getenv("DB_NAME")
 
-    # Check configuration without printing secrets
-    missing = [
-        name
-        for name, value in {
-            "DB_HOST": db_host,
-            "DB_USER": db_user,
-            "DB_PASSWORD": db_password,
-            "DB_NAME": db_name,
-        }.items()
-        if not value
-    ]
-
-    if missing:
+    if not db_password:
         raise RuntimeError(
-            "Missing database environment variables: "
-            + ", ".join(missing)
+            "DB_PASSWORD is missing from the environment"
         )
 
     return pymysql.connect(
@@ -39,4 +26,3 @@ def get_db_connection():
         cursorclass=pymysql.cursors.Cursor,
         ssl={"check_hostname": False},
     )
-
