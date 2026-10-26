@@ -104,7 +104,7 @@ CONTENT TO SUMMARIZE:
 
     # Generate summary
     response = client.models.generate_content(
-        GEMINI_MODEL=gemini-3.5-flash-lite,
+        model = "gemini-3.5-flash-lite",
         contents=prompt,
         config=types.GenerateContentConfig(
             automatic_function_calling=(
