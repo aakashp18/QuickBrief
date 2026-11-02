@@ -5,16 +5,12 @@ from google import genai
 from google.genai import types
 
 
-# ======================================================
-# LOAD ENVIRONMENT VARIABLES
-# ======================================================
+
 
 load_dotenv()
 
 
-# ======================================================
-# GEMINI API
-# ======================================================
+
 
 api_key = os.getenv("GEMINI_API_KEY")
 
@@ -27,9 +23,7 @@ client = genai.Client(
 )
 
 
-# ======================================================
-# COMMON SUMMARY INSTRUCTIONS
-# ======================================================
+
 
 SUMMARY_INSTRUCTIONS = """
 You are a professional document summarization assistant.
@@ -81,9 +75,7 @@ CONTACT INFORMATION
 """
 
 
-# ======================================================
-# SUMMARIZE TEXT
-# ======================================================
+
 
 def summarize_text(text):
 

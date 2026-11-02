@@ -6,16 +6,12 @@ from google.genai import types
 from dotenv import load_dotenv
 
 
-# ======================================================
-# LOAD ENVIRONMENT VARIABLES
-# ======================================================
+
 
 load_dotenv()
 
 
-# ======================================================
-# GEMINI API
-# ======================================================
+
 
 api_key = os.getenv("GEMINI_API_KEY")
 
@@ -28,9 +24,7 @@ client = genai.Client(
 )
 
 
-# ======================================================
-# COMMON SUMMARY INSTRUCTIONS
-# ======================================================
+
 
 SUMMARY_INSTRUCTIONS = """
 You are a professional document and content summarization assistant.
@@ -91,9 +85,7 @@ describing the image.
 """
 
 
-# ======================================================
-# SUMMARIZE IMAGE
-# ======================================================
+
 
 def summarize_image(file_path):
 

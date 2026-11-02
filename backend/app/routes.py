@@ -1,4 +1,5 @@
 import os
+import re
 
 from flask import Blueprint, request, jsonify
 
@@ -12,6 +13,19 @@ from app.database import get_db_connection
 
 
 main = Blueprint("main", __name__)
+
+# ========================================
+# USERNAME AND PASSWORD VALIDATION
+# ========================================
+
+def validate_username(username):
+    pattern = r"^(?=.*[A-Za-z])[A-Za-z0-9]{3,20}$"
+    return re.fullmatch(pattern, username) is not None
+
+
+def validate_password(password):
+    pattern = r"^(?=.*[A-Za-z])(?=.*[0-9])\S{8,}$"
+    return re.fullmatch(pattern, password) is not None
 
 
 UPLOAD_FOLDER = "uploads"
@@ -72,11 +86,28 @@ def register():
             return jsonify({
                 "error": "Email is required"
             }), 400
+        
 
         if not password:
             return jsonify({
                 "error": "Password is required"
             }), 400
+
+        # Validate username
+        if not validate_username(username):
+            return jsonify({
+                "error": "Username must be 3-20 characters and contain only letters and numbers"
+            }), 400
+
+        # Validate password
+        if not validate_password(password):
+            return jsonify({
+                "error": "Password must contain at least 8 characters, including letters and numbers, without spaces"
+            }), 400
+
+
+    
+        
 
         result, status_code = register_user(
             username,
